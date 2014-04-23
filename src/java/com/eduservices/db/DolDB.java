@@ -45,18 +45,15 @@ public class DolDB {
             return conn;
     }
     
-    public TranscriptType getTranscript(String SSNumber) {
+    public TranscriptType getTranscript(String SSNumber) 
+            throws SQLException {
         TranscriptType transcript = new TranscriptType();
         
-        try {
-            StudentInfoType studentInfo = getStudentInfo(SSNumber);
-            transcript.setStudentInfo(studentInfo);
+        StudentInfoType studentInfo = getStudentInfo(SSNumber);
+        transcript.setStudentInfo(studentInfo);
 
-            StudentRecordsType studentRecords = getStudentRecords(SSNumber);
-            transcript.setStudentRecords(studentRecords);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        StudentRecordsType studentRecords = getStudentRecords(SSNumber);
+        transcript.setStudentRecords(studentRecords);
         return transcript;
     }
     

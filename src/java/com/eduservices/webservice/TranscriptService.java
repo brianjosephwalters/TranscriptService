@@ -6,6 +6,8 @@
 
 package com.eduservices.webservice;
 
+import com.eduservices.business.TranscriptServiceImpl;
+import com.eduservices.schema.transcript.TranscriptType;
 import javax.jws.WebService;
 
 /**
@@ -19,9 +21,13 @@ import javax.jws.WebService;
             wsdlLocation = "WEB-INF/wsdl/TranscriptService/Transcript.wsdl")
 public class TranscriptService {
 
-    public com.eduservices.schema.transcript.TranscriptType opGetTranscript(java.lang.String ssNumber) {
-        //TODO implement this method
-        throw new UnsupportedOperationException("Not implemented yet.");
+    TranscriptServiceImpl impl;
+    
+    public TranscriptService () {
+        this.impl = new TranscriptServiceImpl();
+    }
+    public TranscriptType opGetTranscript(String ssNumber) {
+        return this.impl.getTranscript(ssNumber);
     }
     
 }
