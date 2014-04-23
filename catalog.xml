@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://www.docbook.org/xml/5.0/xsd/docbook.xsd" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/www.docbook.org/xml/5.0/xsd/docbook.xsd"/>
+    <system systemId="http://www.docbook.org/xml/5.0/xsd/xlink.xsd" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/www.docbook.org/xml/5.0/xsd/xlink.xsd"/>
+    <system systemId="http://www.docbook.org/xml/5.0/xsd/xml.xsd" uri="src/conf/xml-resources/web-services/NewWebServiceFromWSDL/wsdl/www.docbook.org/xml/5.0/xsd/xml.xsd"/>
+    <system systemId="file:/C:/Users/bjw/Documents/NetBeansProjects/TranscriptService/web/wsdls/Transcript.wsdl" uri="src/conf/xml-resources/web-services/TranscriptService/wsdl/Transcript.wsdl"/>
+    <system systemId="file:/C:/Users/bjw/Documents/NetBeansProjects/TranscriptService/web/wsdls/TranscriptSchema.xsd" uri="src/conf/xml-resources/web-services/TranscriptService/wsdl/TranscriptSchema.xsd"/>
+    <system systemId="http://www.codesynthesis.com/projects/xsstl/xsstl/phone-number.xsd" uri="src/conf/xml-resources/web-services/TranscriptService/wsdl/www.codesynthesis.com/projects/xsstl/xsstl/phone-number.xsd"/>
+</catalog>
