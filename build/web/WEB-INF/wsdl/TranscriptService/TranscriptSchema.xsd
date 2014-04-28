@@ -1,0 +1,122 @@
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        targetNamespace="http://eduservices.com/schema/transcript/" 
+        xmlns:tns="http://eduservices.com/schema/transcript/"
+        xmlns:stl="http://www.codesynthesis.com/xmlns/xsstl"
+        elementFormDefault="qualified">
+    <!--  Could use: http://www.fgdc.gov/schemas/address/addr_type.xsd -->
+    <import namespace="http://www.codesynthesis.com/xmlns/xsstl"
+            schemaLocation="http://www.codesynthesis.com/projects/xsstl/xsstl/phone-number.xsd"/>
+    <element name="Transcript" type="tns:TranscriptType"/>
+    <element name="SSNumber" type="tns:SSNumberType"/>
+    <complexType name="TranscriptType">
+        <sequence>
+            <element name="StudentInfo" type="tns:StudentInfoType"/>
+            <element name="StudentRecords" type="tns:StudentRecordsType"/>
+        </sequence>
+    </complexType>
+	
+    <complexType name="StudentInfoType">
+        <sequence>
+            <element name="SSNumber" type="tns:SSNumberType"/>
+            <element name="FirstName" type="string"/>
+            <element name="LastName" type="string"/>
+            <element name="Addresses" type="tns:AddressesType"/>
+            <element name="PhoneNumbers" type="tns:PhoneNumbersType"/>
+        </sequence>
+    </complexType>
+	
+    <simpleType name="SSNumberType">
+        <restriction base="string">
+            <length value="10"/>
+        </restriction>
+    </simpleType>
+
+    <complexType name="AddressesType">
+        <sequence>
+            <element name="Address" type="tns:AddressType" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="AddressType">
+        <sequence>
+            <element name="AddressCode" type="tns:CodeType"/>
+            <element name="AddressType" type="string"/>
+            <element name="FirstLine" type="string"/>
+            <element name="SecondLine" type="string"/>
+            <element name="City" type="string"/>
+            <element name="ZipCode" type="string"/>
+        </sequence>
+    </complexType>
+	
+	<complexType name="PhoneNumbersType">
+		<sequence>
+			<element name="PhoneNumber" type="stl:PhoneNumber" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="StudentRecordsType">
+		<sequence>
+			<element name="CourseRecords" type="tns:CourseRecordsType"/>
+			<element name="CertificateRecords" type="tns:CertificateRecordsType"/>
+		</sequence>		
+	</complexType>
+	
+	<complexType name="CourseRecordsType">
+		<sequence>
+			<element name="CourseRecord" type="tns:CourseRecordType" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+			
+	<complexType name="CourseRecordType">
+		<sequence>	
+			<element name="CourseTitle" type="tns:CourseTitleType"/>
+			<element name="CourseLevel" type="tns:CourseLevelType"/>
+			<element name="CompletedDate" type="date"/>
+			<element name="Score" type="short"/>
+		</sequence>
+		<attribute name="CourseCode" type="tns:CodeType"/>
+		<attribute name="SectionCode" type="tns:CodeType"/>
+		<attribute name="Year" type="gYear"/>
+	</complexType>
+	
+	<simpleType name="CodeType">
+		<restriction base="string">
+			<length value="10"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="CourseTitleType">
+		<restriction base="string">
+			<length value="50"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="CourseLevelType">
+		<restriction base="string">
+			<length value="8"/>
+		</restriction>
+	</simpleType>
+	
+	<complexType name="CertificateRecordsType">
+		<sequence>
+			<element name="CertificateRecord" type="tns:CertificateRecordType" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="CertificateRecordType">
+		<sequence>
+			
+			<element name="CertificateTitle" type="tns:CertificateTitleType"/>
+			<element name="CertificateExpiration" type="date"/>
+		</sequence>
+		<attribute name="CertificateCode" type="tns:CodeType"/>
+	</complexType>
+	
+	<simpleType name="CertificateTitleType">
+		<restriction base="string">
+			<length value="30"/>
+		</restriction>
+	</simpleType>
+	
+			
+</schema>
