@@ -6,7 +6,7 @@
 
 package com.eduservices.business;
 
-import com.eduservices.db.DolDB;
+import com.eduservices.db.TranscriptDB;
 import com.eduservices.schema.transcript.TranscriptType;
 import java.sql.SQLException;
 
@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class TranscriptServiceImpl {
     public TranscriptType getTranscript(String SSNumber) {
-        DolDB db = new DolDB();
+        TranscriptDB db = new TranscriptDB();
         TranscriptType transcript = null;
         try {
             transcript = db.getTranscript(SSNumber);

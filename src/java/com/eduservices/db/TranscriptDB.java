@@ -11,19 +11,16 @@ import com.eduservices.schema.transcript.StudentInfoType;
 import com.eduservices.schema.transcript.StudentRecordsType;
 import com.eduservices.schema.transcript.TranscriptType;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-public class DolDB {
+public class TranscriptDB {
 	
-    public DolDB() {
+    public TranscriptDB() {
     }
     
     //connection
@@ -60,12 +57,14 @@ public class DolDB {
     public StudentInfoType getStudentInfo(String SSNumber) 
             throws SQLException {        
         Connection connection = this.dbConnection();
-        String query = "SELECT * FROM person WHERE ss_num = ?";
+        String query = "SELECT * FROM person WHERE ss_number = ?";
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1,SSNumber);
         ResultSet results = stmt.executeQuery();
+        connection.close();
         
         StudentInfoType studentInfo = new StudentInfoType();
+        results.next();
         String firstName = results.getString("first_name");
         String lastName = results.getString("last_name");
         PhoneNumbersType phoneNumbers = getPhoneNumbers(SSNumber);
@@ -89,6 +88,7 @@ public class DolDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1,SSNumber);
         ResultSet results = stmt.executeQuery();
+        connection.close();
         
         PhoneNumbersType phoneNumbers = new PhoneNumbersType();
         while (results.next()) {
@@ -106,6 +106,7 @@ public class DolDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, SSNumber);
         ResultSet results = stmt.executeQuery();
+        connection.close();
         
         AddressesType addresses = new AddressesType();
         while (results.next()) {
@@ -142,6 +143,7 @@ public class DolDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, SSNumber);
         ResultSet results = stmt.executeQuery();
+        connection.close();
         
         DatatypeFactory factory = null;
         try {
@@ -164,10 +166,12 @@ public class DolDB {
             courseRecord.setYear(cal1);
             
             Date completedDate = results.getDate("completed_date");
-            GregorianCalendar gc = new GregorianCalendar();
-            gc.setTime(completedDate);
-            XMLGregorianCalendar cal2 = factory.newXMLGregorianCalendar(gc);
-            courseRecord.setCompletedDate(cal2);
+            if (completedDate != null) {
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.setTime(completedDate);
+                XMLGregorianCalendar cal2 = factory.newXMLGregorianCalendar(gc);
+                courseRecord.setCompletedDate(cal2);
+            }
             courseRecords.getCourseRecord().add(courseRecord);
         }
         return courseRecords;
@@ -177,11 +181,12 @@ public class DolDB {
             throws SQLException {
         Connection connection = this.dbConnection();
         String query = "SELECT * "
-                + " FROM exam_taken NATURAL JOIN exam_type NATURAL JOIN certificate"
+                + " FROM exam_taken NATURAL JOIN exam_type NATURAL JOIN exam NATURAL JOIN certificate"
                 + " WHERE ss_number = ?";
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, SSNumber);
         ResultSet results = stmt.executeQuery();
+        connection.close();
         
         DatatypeFactory factory = null;
         try {
