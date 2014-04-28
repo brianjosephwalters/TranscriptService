@@ -61,7 +61,6 @@ public class TranscriptDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1,SSNumber);
         ResultSet results = stmt.executeQuery();
-        connection.close();
         
         StudentInfoType studentInfo = new StudentInfoType();
         results.next();
@@ -88,7 +87,6 @@ public class TranscriptDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1,SSNumber);
         ResultSet results = stmt.executeQuery();
-        connection.close();
         
         PhoneNumbersType phoneNumbers = new PhoneNumbersType();
         while (results.next()) {
@@ -106,7 +104,6 @@ public class TranscriptDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, SSNumber);
         ResultSet results = stmt.executeQuery();
-        connection.close();
         
         AddressesType addresses = new AddressesType();
         while (results.next()) {
@@ -143,7 +140,6 @@ public class TranscriptDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, SSNumber);
         ResultSet results = stmt.executeQuery();
-        connection.close();
         
         DatatypeFactory factory = null;
         try {
@@ -186,7 +182,6 @@ public class TranscriptDB {
         PreparedStatement stmt = connection.prepareStatement(query);
         stmt.setString(1, SSNumber);
         ResultSet results = stmt.executeQuery();
-        connection.close();
         
         DatatypeFactory factory = null;
         try {
